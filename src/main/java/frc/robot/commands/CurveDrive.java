@@ -29,11 +29,8 @@ public class CurveDrive extends CommandBase {
         RobotContainer.m_driveTrain.getDifferentialDrive()
             .curvatureDrive(speed, -turn * .6, false);
 
-        if (speed != 0) return;
-        final double rotation = RobotContainer.controller.getLeftX();
-
-        if (Math.abs(rotation) > .1)
-            RobotContainer.m_driveTrain.rotate(rotation);
+        if (speed != 0 && Math.abs(turn) > .1)
+            RobotContainer.m_driveTrain.rotate(turn);
     }
 
     // Called once the command ends or is interrupted.
