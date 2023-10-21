@@ -4,14 +4,16 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.commands.CurveDrive;
-
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
+
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.CurveDrive;
+import frc.robot.commands.ShooterRot;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,19 +27,19 @@ import edu.wpi.first.wpilibj.XboxController;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public static DriveTrain m_driveTrain = new DriveTrain();
+    public static Shooter m_shooter = new Shooter();
 
     public static XboxController controller = new XboxController(0);
     public static CurveDrive m_curveDrive = new CurveDrive(m_driveTrain);
+    public static ShooterRot m_shooterRot = new ShooterRot(m_shooter);
 
-    // Replace with CommandPS4Controller or CommandJoystick if needed
     private final CommandXboxController m_driverController = new CommandXboxController(
-            OperatorConstants.kDriverControllerPort);
+        OperatorConstants.kDriverControllerPort);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-        // Configure the trigger bindings
         configureBindings();
     }
 
@@ -67,7 +69,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        // An example command will be run in autonomous
         return null;
     }
 }

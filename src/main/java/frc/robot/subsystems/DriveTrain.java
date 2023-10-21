@@ -24,7 +24,7 @@ public class DriveTrain extends SubsystemBase {
         rightMotor.setInverted(false);
         leftMotor.setInverted(false);
 
-        diffControl = new DifferentialDrive((MotorController) leftMotor, (MotorController) rightMotor);
+        diffControl = new DifferentialDrive((MotorController)leftMotor, (MotorController)rightMotor);
         diffControl.setExpiration(2);
         diffControl.setSafetyEnabled(true);
 
@@ -34,7 +34,6 @@ public class DriveTrain extends SubsystemBase {
     public void rotate(double rotate) {
         rightMotor.set(TalonSRXControlMode.PercentOutput, rotate * -.6);
         leftMotor.set(TalonSRXControlMode.PercentOutput, rotate * .6);
-
     }
 
     @Override
