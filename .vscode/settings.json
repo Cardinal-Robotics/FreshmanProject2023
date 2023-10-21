@@ -2,7 +2,7 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.server.launchMode": "Standard",
     "editor.detectIndentation": false,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.tabSize": 4,
     "files.exclude": {
         "**/.git": true,

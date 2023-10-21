@@ -23,25 +23,22 @@ public class CurveDrive extends CommandBase {
     @Override
     public void execute() {
         final double speed = (Math.pow(RobotContainer.controller.getRightTriggerAxis(), 3)
-                - Math.pow(RobotContainer.controller.getLeftTriggerAxis(), 3));
+            - Math.pow(RobotContainer.controller.getLeftTriggerAxis(), 3));
         final double turn = RobotContainer.controller.getLeftX();
 
         RobotContainer.m_driveTrain.getDifferentialDrive()
-                .curvatureDrive(speed, -turn * .6, false);
+            .curvatureDrive(speed, -turn * .6, false);
 
-        if (speed != 0)
-            return;
-        double rotation = RobotContainer.controller.getLeftX();
-        if (Math.abs(rotation) < .1)
-            return;
+        if (speed != 0) return;
+        final double rotation = RobotContainer.controller.getLeftX();
 
-        RobotContainer.m_driveTrain.rotate(rotation);
+        if (Math.abs(rotation) > .1)
+            RobotContainer.m_driveTrain.rotate(rotation);
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-    }
+    public void end(boolean interrupted) {}
 
     // Returns true when the command should end.
     @Override
