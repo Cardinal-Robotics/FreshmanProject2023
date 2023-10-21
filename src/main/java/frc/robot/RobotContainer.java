@@ -7,8 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.XboxController;
-
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.CurveDrive;
@@ -29,7 +27,7 @@ public class RobotContainer {
     public static DriveTrain m_driveTrain = new DriveTrain();
     public static Shooter m_shooter = new Shooter();
 
-    public static XboxController controller = new XboxController(0);
+    public static CommandXboxController controller = new CommandXboxController(0);
     public static CurveDrive m_curveDrive = new CurveDrive(m_driveTrain);
     public static ShooterRot m_shooterRot = new ShooterRot(m_shooter);
 
@@ -58,9 +56,8 @@ public class RobotContainer {
      * joysticks}.
      */
     private void configureBindings() {
-        // Schedule `exampleMethodCommand` when the Xbox controller's B button is
-        // pressed,
-        // cancelling on release.
+        controller.rightTrigger().whileTrue(m_shooter.executeRotation());
+        //controller.a().whileTrue();
     }
 
     /**

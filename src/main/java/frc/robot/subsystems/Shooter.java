@@ -4,8 +4,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -21,6 +22,12 @@ public class Shooter extends SubsystemBase {
 
     public void fire() throws Exception {
         throw new Exception("Not yet implemented");
+    }
+
+    public CommandBase executeRotation() {
+        return runOnce(() -> {
+            RobotContainer.m_shooterRot.execute();
+        });
     }
 
     @Override
