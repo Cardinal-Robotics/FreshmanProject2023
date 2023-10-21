@@ -7,10 +7,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
   private TalonSRX rightMotor = new TalonSRX(1);
@@ -37,7 +39,7 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.m_driveTrain, RobotContainer.m_curveDrive);
   }
 
   public DifferentialDrive getDifferentialDrive() {
