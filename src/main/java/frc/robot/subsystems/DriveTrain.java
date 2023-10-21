@@ -15,34 +15,34 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
-  private TalonSRX rightMotor = new TalonSRX(1);
-  private TalonSRX leftMotor = new TalonSRX(0);
-  private DifferentialDrive diffControl;
+    private TalonSRX rightMotor = new TalonSRX(1);
+    private TalonSRX leftMotor = new TalonSRX(0);
+    private DifferentialDrive diffControl;
 
-  /** Creates a new DriveTrain. */
-  public DriveTrain() {
-    rightMotor.setInverted(false);
-    leftMotor.setInverted(false);
+    /** Creates a new DriveTrain. */
+    public DriveTrain() {
+        rightMotor.setInverted(false);
+        leftMotor.setInverted(false);
 
-    diffControl = new DifferentialDrive((MotorController)leftMotor, (MotorController)rightMotor);
-    diffControl.setExpiration(2);
-    diffControl.setSafetyEnabled(true);
-    
-    diffControl.curvatureDrive(0, 0, false);
-  }
+        diffControl = new DifferentialDrive((MotorController) leftMotor, (MotorController) rightMotor);
+        diffControl.setExpiration(2);
+        diffControl.setSafetyEnabled(true);
 
-  public void rotate(double rotate) {
-    rightMotor.set(TalonSRXControlMode.PercentOutput, rotate * -.6);
-    leftMotor.set(TalonSRXControlMode.PercentOutput, rotate * .6);
-    
-  }
+        diffControl.curvatureDrive(0, 0, false);
+    }
 
-  @Override
-  public void periodic() {
-    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.m_driveTrain, RobotContainer.m_curveDrive);
-  }
+    public void rotate(double rotate) {
+        rightMotor.set(TalonSRXControlMode.PercentOutput, rotate * -.6);
+        leftMotor.set(TalonSRXControlMode.PercentOutput, rotate * .6);
 
-  public DifferentialDrive getDifferentialDrive() {
-    return diffControl;
-  }
+    }
+
+    @Override
+    public void periodic() {
+        CommandScheduler.getInstance().setDefaultCommand(RobotContainer.m_driveTrain, RobotContainer.m_curveDrive);
+    }
+
+    public DifferentialDrive getDifferentialDrive() {
+        return diffControl;
+    }
 }

@@ -10,37 +10,42 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.RobotContainer;
 
 public class CurveDrive extends CommandBase {
-  public CurveDrive(DriveTrain train) {
-    addRequirements(RobotContainer.m_driveTrain);
-  }
+    public CurveDrive(DriveTrain train) {
+        addRequirements(RobotContainer.m_driveTrain);
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    final double speed = (Math.pow(RobotContainer.controller.getRightTriggerAxis(), 3) - Math.pow(RobotContainer.controller.getLeftTriggerAxis(), 3));
-    final double turn = RobotContainer.controller.getLeftX();
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        final double speed = (Math.pow(RobotContainer.controller.getRightTriggerAxis(), 3)
+                - Math.pow(RobotContainer.controller.getLeftTriggerAxis(), 3));
+        final double turn = RobotContainer.controller.getLeftX();
 
-    RobotContainer.m_driveTrain.getDifferentialDrive()
-      .curvatureDrive(speed, -turn * .6, false);
+        RobotContainer.m_driveTrain.getDifferentialDrive()
+                .curvatureDrive(speed, -turn * .6, false);
 
-    if(speed != 0) return;
-    double rotation = RobotContainer.controller.getLeftX();
-    if(Math.abs(rotation) < .1) return; 
+        if (speed != 0)
+            return;
+        double rotation = RobotContainer.controller.getLeftX();
+        if (Math.abs(rotation) < .1)
+            return;
 
-    RobotContainer.m_driveTrain.rotate(rotation);
-  }
+        RobotContainer.m_driveTrain.rotate(rotation);
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
