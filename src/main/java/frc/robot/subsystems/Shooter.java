@@ -4,36 +4,34 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 public class Shooter extends SubsystemBase {
-    private WPI_TalonSRX arm = new WPI_TalonSRX(4);
+    private WPI_TalonSRX shooterMotor = new WPI_TalonSRX(4);
 
     public Shooter() {}
 
     public void rotate(double rotate) {
-        arm.set(TalonSRXControlMode.PercentOutput, rotate * -.6);
+        shooterMotor.set(TalonSRXControlMode.PercentOutput, rotate);
     }
 
     public void fire() throws Exception {
         throw new Exception("Not yet implemented");
     }
 
-    public CommandBase rotateForward() {
+    public CommandBase fireBall() {
         return runOnce(() -> {
             rotate(1);
         });
     }
 
-    public CommandBase rotateBackwards() {
+    public CommandBase releaseBall() {
         return runOnce(() -> {
-            rotate(-0.3);
+            rotate(-.3);
         });
     }
 

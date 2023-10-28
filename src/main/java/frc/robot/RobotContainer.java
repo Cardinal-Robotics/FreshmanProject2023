@@ -51,8 +51,8 @@ public class RobotContainer {
      * joysticks}.
      */
     private void configureBindings() {
-        controller.a().whileTrue(m_shooter.rotateForward());
-        controller.b().whileTrue(m_shooter.rotateBackwards());
+        controller.a().whileTrue(m_shooter.fireBall());
+        controller.b().whileTrue(m_shooter.releaseBall());
     }
 
     /**
