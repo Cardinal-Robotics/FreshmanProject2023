@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class Shooter extends SubsystemBase {
@@ -23,15 +25,9 @@ public class Shooter extends SubsystemBase {
         throw new Exception("Not yet implemented");
     }
 
-    public CommandBase fireBall() {
+    public CommandBase executeCommand() {
         return runOnce(() -> {
-            rotate(1);
-        });
-    }
-
-    public CommandBase releaseBall() {
-        return runOnce(() -> {
-            rotate(-.3);
+            RobotContainer.m_shooterTrigger.execute();
         });
     }
 
