@@ -7,10 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.CurveDrive;
-import frc.robot.commands.ShooterRot;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -27,12 +25,9 @@ public class RobotContainer {
     public static DriveTrain m_driveTrain = new DriveTrain();
     public static Shooter m_shooter = new Shooter();
 
-    public static CommandXboxController controller = new CommandXboxController(0);
     public static CurveDrive m_curveDrive = new CurveDrive(m_driveTrain);
-    public static ShooterRot m_shooterRot = new ShooterRot(m_shooter);
 
-    private final CommandXboxController m_driverController = new CommandXboxController(
-        OperatorConstants.kDriverControllerPort);
+    public static CommandXboxController controller = new CommandXboxController(0);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -56,8 +51,8 @@ public class RobotContainer {
      * joysticks}.
      */
     private void configureBindings() {
-        controller.rightTrigger().whileTrue(m_shooter.executeRotation());
-        //controller.a().whileTrue();
+        controller.a().whileTrue(m_shooter.rotateForward());
+        controller.b().whileTrue(m_shooter.rotateBackwards());
     }
 
     /**

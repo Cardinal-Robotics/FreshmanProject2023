@@ -10,9 +10,10 @@ import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Shooter extends SubsystemBase {
-    private TalonSRX arm = new TalonSRX(2);
+    private WPI_TalonSRX arm = new WPI_TalonSRX(4);
 
     public Shooter() {}
 
@@ -24,9 +25,15 @@ public class Shooter extends SubsystemBase {
         throw new Exception("Not yet implemented");
     }
 
-    public CommandBase executeRotation() {
+    public CommandBase rotateForward() {
         return runOnce(() -> {
-            RobotContainer.m_shooterRot.execute();
+            rotate(1);
+        });
+    }
+
+    public CommandBase rotateBackwards() {
+        return runOnce(() -> {
+            rotate(-0.3);
         });
     }
 

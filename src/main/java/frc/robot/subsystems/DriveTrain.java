@@ -4,10 +4,14 @@
 
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
+
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,20 +19,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
-    private TalonSRX rightMotor = new TalonSRX(1);
-    private TalonSRX leftMotor = new TalonSRX(0);
+    private WPI_TalonSRX rightMotor = new WPI_TalonSRX(2);
+    private WPI_TalonSRX leftMotor = new WPI_TalonSRX(6);
     private DifferentialDrive diffControl;
 
     /** Creates a new DriveTrain. */
     public DriveTrain() {
-        rightMotor.setInverted(false);
+        rightMotor.setInverted(true);
         leftMotor.setInverted(false);
 
-        diffControl = new DifferentialDrive((MotorController)leftMotor, (MotorController)rightMotor);
+        diffControl = new DifferentialDrive(leftMotor, rightMotor);
         diffControl.setExpiration(2);
-        diffControl.setSafetyEnabled(true);
+        diffControl.setSafetyEnabled(false);
 
-        diffControl.curvatureDrive(0, 0, false);
+        //diffControl.curvatureDrive(0, 0, false);
+    }
+
+    public void CurveDrive(double speed, double turn) {
+        diffControl.curvatureDrive(speed, -turn, true);
     }
 
     public void rotate(double rotate) {

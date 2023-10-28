@@ -25,11 +25,10 @@ public class CurveDrive extends CommandBase {
         final double speed = (Math.pow(RobotContainer.controller.getRightTriggerAxis(), 3)
             - Math.pow(RobotContainer.controller.getLeftTriggerAxis(), 3));
         final double turn = RobotContainer.controller.getLeftX();
+        
+        train.CurveDrive(speed, turn * .6);
 
-        train.getDifferentialDrive()
-            .curvatureDrive(speed, -turn * .6, false);
-
-        if (speed != 0 && Math.abs(turn) > .1)
+        if (speed == 0 && Math.abs(turn) > .1)
             train.rotate(turn);
     }
 
