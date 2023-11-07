@@ -7,9 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ShooterTrigger;
+import frc.robot.commands.ShooterTrigger.ShooterInstruction;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.CurveDrive;
-import frc.robot.commands.ShooterTrigger;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -26,7 +27,6 @@ public class RobotContainer {
     public static DriveTrain m_driveTrain = new DriveTrain();
     public static Shooter m_shooter = new Shooter();
 
-    public static ShooterTrigger m_shooterTrigger = new ShooterTrigger(m_shooter);
     public static CurveDrive m_curveDrive = new CurveDrive(m_driveTrain);
 
     public static CommandXboxController controller = new CommandXboxController(0);
@@ -53,8 +53,8 @@ public class RobotContainer {
      * joysticks}.
      */
     private void configureBindings() {
-        controller.a().whileTrue(m_shooter.executeCommand());
-        controller.b().whileTrue(m_shooter.executeCommand());
+        controller.a().whileTrue(new ShooterTrigger(m_shooter, ShooterInstruction.A));
+        controller.b().whileTrue(new ShooterTrigger(m_shooter, ShooterInstruction.B));
     }
 
     /**

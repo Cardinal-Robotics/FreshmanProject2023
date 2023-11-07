@@ -9,36 +9,53 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterTrigger extends CommandBase {
+    private ShooterInstruction m_instruction;
     private Shooter shooter;
 
-    /** Creates a new ShooterTrigger. */
-    public ShooterTrigger(Shooter _shooter) {
+    public ShooterTrigger(Shooter _shooter, ShooterInstruction instruction) {
         addRequirements(RobotContainer.m_shooter);
+        m_instruction = instruction;
         shooter = _shooter;
-        // Use addRequirements() here to declare subsystem dependencies.
     }
 
-    // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
-    // Called every time the scheduler runs while the command is scheduled.
+    public static enum ShooterInstruction {
+        A(0), B(1);
+
+        int instruction;
+
+        private ShooterInstruction(int instruction) {
+            this.instruction = instruction;
+        }
+    }
+    
     @Override
     public void execute() {
-        if(RobotContainer.controller.a().getAsBoolean())
-            shooter.rotate(0.6);
-        else if(RobotContainer.controller.b().getAsBoolean())
-            shooter.rotate(-.3);
+        _checkForInput();
+
+        switch(m_instruction) {
+            case A: shooter.rotateShooter(1);
+                break;
+            case B: shooter.rotateFeeder(0.3);
+                break;
+        }            
     }
 
-    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        shooter.rotate(0);
+        _checkForInput();
     }
 
-    // Returns true when the command should end.
+    // Motor sometimes becomes a toggle, I'm not sure why this should help to counter this issue.
+    private void _checkForInput() {
+        if(!RobotContainer.controller.a().getAsBoolean())
+            shooter.rotateShooter(0);
+        if(!RobotContainer.controller.b().getAsBoolean()) 
+            shooter.rotateFeeder(0);
+    }
+
     @Override
     public boolean isFinished() {
         return false;
