@@ -14,7 +14,8 @@ public class Shooter extends SubsystemBase {
     private WPI_TalonSRX feederMotor = new WPI_TalonSRX(4);
 
     public Shooter() {
-    
+        shooterMotor.setInverted(true);
+        feederMotor.setInverted(true);
     }
 
     public void rotateShooter(double rotate) {
@@ -23,10 +24,6 @@ public class Shooter extends SubsystemBase {
 
     public void rotateFeeder(double rotate) {
         feederMotor.set(TalonSRXControlMode.PercentOutput, rotate);
-    }
-
-    public void fire() throws Exception {
-        throw new Exception("Not yet implemented");
     }
 
     @Override

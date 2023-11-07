@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
@@ -33,14 +34,14 @@ public class ShooterTrigger extends CommandBase {
     
     @Override
     public void execute() {
-        _checkForInput();
-
         switch(m_instruction) {
             case A: shooter.rotateShooter(1);
                 break;
             case B: shooter.rotateFeeder(0.3);
                 break;
-        }            
+        }
+        
+        _checkForInput();
     }
 
     @Override
@@ -58,6 +59,8 @@ public class ShooterTrigger extends CommandBase {
 
     @Override
     public boolean isFinished() {
+        DriverStation.reportWarning("isFinished() is being called", false);
+        _checkForInput();
         return false;
     }
 }
