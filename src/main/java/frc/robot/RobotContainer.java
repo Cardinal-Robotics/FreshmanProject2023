@@ -6,6 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.PathPlannerPath;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ShooterTrigger;
 import frc.robot.commands.ShooterTrigger.ShooterInstruction;
@@ -35,6 +40,8 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
+        NamedCommands.registerCommand("fire", );
+
         configureBindings();
     }
 
@@ -63,6 +70,8 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return null;
+        PathPlannerPath path = PathPlannerPath.fromPathFile("spawn2score");
+
+        return AutoBuilder.followPathWithEvents(path);
     }
 }
