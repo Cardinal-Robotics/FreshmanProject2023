@@ -27,12 +27,12 @@ public class Shooter extends SubsystemBase {
         feederMotor.set(TalonSRXControlMode.PercentOutput, rotate);
     }
 
-    public void timedFire(double delay) {
+    public boolean timedFire(double delay) {
         shooterMotor.set(TalonSRXControlMode.PercentOutput, 1);
-
         Timer.delay(delay);
-
         shooterMotor.set(TalonSRXControlMode.PercentOutput, 0);
+        
+        return true;
     }
 
     @Override

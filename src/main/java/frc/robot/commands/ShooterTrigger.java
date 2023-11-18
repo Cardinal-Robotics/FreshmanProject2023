@@ -12,6 +12,8 @@ import frc.robot.RobotContainer;
 
 public class ShooterTrigger extends CommandBase {
     private ShooterInstruction m_instruction;
+    private boolean m_finished = false;
+
     private Shooter shooter;
 
     public ShooterTrigger(Shooter _shooter, ShooterInstruction instruction) {
@@ -40,8 +42,7 @@ public class ShooterTrigger extends CommandBase {
                 break;
             case B: shooter.rotateFeeder(0.3);
                 break;
-            case Fire: shooter.timedFire(2);
-                break;
+            case Fire: m_finished = shooter.timedFire(2);
         }
         
         _checkForInput();
@@ -64,6 +65,9 @@ public class ShooterTrigger extends CommandBase {
     public boolean isFinished() {
         DriverStation.reportWarning("isFinished() is being called", false);
         _checkForInput();
-        return false;
+
+        if(m_instruction == ShooterInstruction.Fire)
+            return m_finished;
+        else return false;
     }
 }

@@ -5,12 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
-
+import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.ShooterTrigger.ShooterInstruction;
 import frc.robot.commands.ShooterTrigger;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.AutonomousDrive;
 import frc.robot.commands.CurveDrive;
 import frc.robot.subsystems.Shooter;
 
@@ -42,10 +42,14 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        PathPlannerPath path = PathPlannerPath.fromPathFile("spawn2score");
 
-        return AutoBuilder.followPathWithEvents(path);
+        return Commands.sequence(
+            new AutonomousDrive(m_driveTrain), 
+            new ShooterTrigger(m_shooter, ShooterInstruction.Fire)
+        );
     }
 
-    public void disable() {}
+    public void disable() {
+        m_driveTrain.disable();
+    }
 }
