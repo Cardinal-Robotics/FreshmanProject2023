@@ -4,10 +4,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj.DriverStation;
+
 import frc.robot.subsystems.Shooter;
+import frc.robot.RobotContainer;
 
 public class ShooterTrigger extends CommandBase {
     private ShooterInstruction m_instruction;
@@ -23,7 +24,7 @@ public class ShooterTrigger extends CommandBase {
     public void initialize() {}
 
     public static enum ShooterInstruction {
-        A(0), B(1);
+        A(0), B(1), Fire(2);
 
         int instruction;
 
@@ -38,6 +39,8 @@ public class ShooterTrigger extends CommandBase {
             case A: shooter.rotateShooter(1);
                 break;
             case B: shooter.rotateFeeder(0.3);
+                break;
+            case Fire: shooter.timedFire(2);
                 break;
         }
         

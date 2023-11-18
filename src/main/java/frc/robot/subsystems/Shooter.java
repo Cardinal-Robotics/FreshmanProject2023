@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Shooter extends SubsystemBase {
     private WPI_TalonSRX shooterMotor = new WPI_TalonSRX(3);
@@ -24,6 +25,14 @@ public class Shooter extends SubsystemBase {
 
     public void rotateFeeder(double rotate) {
         feederMotor.set(TalonSRXControlMode.PercentOutput, rotate);
+    }
+
+    public void timedFire(double delay) {
+        shooterMotor.set(TalonSRXControlMode.PercentOutput, 1);
+
+        Timer.delay(delay);
+
+        shooterMotor.set(TalonSRXControlMode.PercentOutput, 0);
     }
 
     @Override

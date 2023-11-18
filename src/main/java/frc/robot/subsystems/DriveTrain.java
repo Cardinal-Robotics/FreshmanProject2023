@@ -18,7 +18,6 @@ public class DriveTrain extends SubsystemBase {
     private WPI_TalonSRX leftMotor = new WPI_TalonSRX(6);
     private DifferentialDrive diffControl;
 
-    /** Creates a new DriveTrain. */
     public DriveTrain() {
         rightMotor.setInverted(true);
         leftMotor.setInverted(false);
