@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
@@ -74,6 +74,6 @@ public class DriveTrain extends SubsystemBase {
         CurveDrive(0, 0);
         rotate(0);
 
-        
+        System.exit(0);
     }
 }
